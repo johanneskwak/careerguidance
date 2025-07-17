@@ -5,8 +5,7 @@ from openai import OpenAI
 st.set_page_config(page_title="진로 추천기", page_icon="🎓", layout="centered")
 
 # 사이드바에서 API 키 입력
-st.sidebar.header("🔐 OpenAI API Key 입력")
-openai_api_key = st.sidebar.text_input("API Key", type="password")
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 st.title("🧭 AI 진로 추천기")
 st.markdown("학생의 관심사, 강점, 가치관을 바탕으로 AI가 직업을 추천해줘요!")
