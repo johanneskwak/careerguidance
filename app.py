@@ -24,13 +24,19 @@ if st.button("직업 추천 받기"):
             가치관: {value}
             형식: 직업명 - 간단한 설명 / 필요한 역량 리스트
             """
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": "너는 진로 추천 전문가야."},
-                    {"role": "user", "content": prompt}
-                ]
-            )
-            result = response["choices"][0]["message"]["content"]
+from openai import OpenAI
+
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "너는 진로 전문가야."},
+        {"role": "user", "content": prompt}
+    ]
+)
+
+result = response.choices[0].message.content
+st.markdown(result)
             st.success("추천 결과:")
             st.markdown(result)
